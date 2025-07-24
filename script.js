@@ -17,57 +17,32 @@ $(document).ready(function () {
 
   //GALERY SECTION
 
-  // Image Lightbox
-  const imageModal = document.getElementById('lightbox')
-  const imageModalImg = document.getElementById('lightbox-img')
-  const imageClose = imageModal.querySelector('.close')
-
-  document.querySelectorAll('.gallery-image').forEach((img) => {
-    img.addEventListener('click', () => {
-      imageModal.style.display = 'flex'
-      imageModalImg.src = img.src
-    })
-  })
-
-  imageClose.addEventListener('click', () => {
-    imageModal.style.display = 'none'
-  })
-
-  imageModal.addEventListener('click', (e) => {
-    if (e.target === imageModal) imageModal.style.display = 'none'
-  })
-
-  // Video Modal
-  const videoModal = document.getElementById('videoModal')
-  const videoFrame = document.getElementById('videoFrame')
-  const videoClose = document.getElementById('videoClose')
-
-  document.querySelectorAll('.video-thumbnail').forEach((div) => {
-    div.addEventListener('click', () => {
-      const videoUrl = div.getAttribute('data-video')
-      // Embed YouTube or local video
-      if (videoUrl.includes('youtube') || videoUrl.includes('vimeo')) {
-        videoFrame.src = videoUrl + '?autoplay=1'
-      } else {
-        videoFrame.outerHTML = `<video id="videoFrame" controls autoplay style="width:100%; max-height:80vh;"><source src="${videoUrl}" type="video/mp4">Your browser does not support the video tag.</video>`
-      }
-      videoModal.style.display = 'flex'
-    })
-  })
-
-  videoClose.addEventListener('click', () => {
-    videoModal.style.display = 'none'
-    // Reset iframe or video
-    videoFrame.src = ''
-    videoModal.querySelector('video')?.remove()
-    videoModal.innerHTML +=
-      '<div class="video-wrapper"><iframe id="videoFrame" frameborder="0" allowfullscreen></iframe></div>'
-  })
-
-  videoModal.addEventListener('click', (e) => {
-    if (e.target === videoModal) {
-      videoClose.click()
-    }
+  const swiper = new Swiper('.mySwiper', {
+    loop: true,
+    spaceBetween: 20, // spacing between slides
+    slidesPerView: 1, // default for mobile
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+    autoplay: {
+      delay: 3000,
+      disableOnInteraction: false,
+    },
+    breakpoints: {
+      // When window width is >= 768px (tablet+)
+      768: {
+        slidesPerView: 2,
+      },
+      // When window width is >= 1024px (desktop)
+      1024: {
+        slidesPerView: 3,
+      },
+    },
   })
 
   // slide-up script
