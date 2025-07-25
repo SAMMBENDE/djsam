@@ -342,13 +342,14 @@ section .title::after{
 /* galery section */
 
 .gallery {
-  background-color: #ffffff;
+  background-color: crimson;
   padding: 60px 20px;
   text-align: center;
   color: #040404;
 }
 
 .gallery h2 {
+  font-family: 'Ubuntu', sans-serif;
   font-size: 2.5rem;
   margin-bottom: 40px;
 }
@@ -745,7 +746,7 @@ footer span a:hover{
 
 @media (max-width: 768px) {
   .swiper-slide {
-    height: 250px;
+    height: 350px;
   }
 }
 
