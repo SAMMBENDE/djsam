@@ -240,42 +240,102 @@
     <div class="swiper-button-next"></div>
   </div>
 </section>
-
-
     
     <!-- END OF GALLERY SECTION -->
    
+<section class="boxes">
+  <div class="audio-box">
+    <audio id="audioPlayer" controls preload="none" style="width:100%;"></audio>
+    <ul id="playlist" class="playlist">
+      <li data-src="audio/DjMaitreSam.mp3">DjSaM Hip-Hop Apéro</li>
+      <li data-src="audio/hiphop greatest.mp3">DjSaM & The DjFamily</li>
+      <li data-src="audio/DjSaM_kompa_zouk.mp3">DjSaM Zouk/Kompa</li>
+      <li data-src="audio/flashBack.mp3">DjSaM flashBack</li>
+      <li data-src="audio/Djsam_afrobeat_2025.mp3">DjSaM Afrobeats FrenchTouch</li>
+      <li data-src="djsam_frenchFunk.mp3">DjSaM French Funk</li>
+      <li data-src="djsam_makossa+.mp3">DjSaM Makossa+</li>
+    </ul>
 
+  </div>
+</section>
+
+<style>
+/* Responsive audio player and playlist */
+.audio-box {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 16px;
+  background: #222;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+#audioPlayer {
+  width: 100%;
+  margin-bottom: 12px;
+}
+.playlist {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.playlist li {
+  padding: 10px 12px;
+  margin-bottom: 6px;
+  background: #333;
+  color: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.playlist li.active,
+.playlist li:hover {
+  background: #ff9800;
+  color: #222;
+}
+@media (max-width: 600px) {
+  .audio-box {
+    max-width: 98vw;
+    padding: 8px;
+  }
+  .playlist li {
+    font-size: 16px;
+    padding: 8px 8px;
+  }
+}
+</style>
+
+<script>
+// filepath: /Users/sampsonmbende/Documents/djsam/index.html
+const audioPlayer = document.getElementById('audioPlayer');
+const playlistItems = document.querySelectorAll('#playlist li');
+
+playlistItems.forEach(item => {
+  item.addEventListener('click', function() {
+    // Remove active class from all
+    playlistItems.forEach(li => li.classList.remove('active'));
+    // Add active class to clicked
+    this.classList.add('active');
+    // Set audio src and play
+    audioPlayer.src = this.dataset.src;
+    audioPlayer.play();
+  });
+});
+
+// Optional: Play first track by default
+if (playlistItems.length > 0) {
+  playlistItems[0].classList.add('active');
+  audioPlayer.src = playlistItems[0].dataset.src;
+}
+</script>
 
     
 
 
 
-    <section class="boxes">
-        <div class="audio-box">
-          <audio src=""  controls id="audioPlayer">
-          Your browser does not support the audio element.
-          </audio>
-          <!--Audio Player Playlist-->
-          <ul id="playlist">            
-            <li><a href="audio/DjMaitreSam.mp3">DjSaM Hip-Hop Apéro></a></li>
-            <li><a href="audio/hiphop greatest.mp3">DjSaM & The DjFamily</a></li>
-            <li><a href="audio/DjSaM_kompa_zouk.mp3">DjSaM Zouk/Kompa</a></li>
-            <li><a href="audio/flashBack.mp3">DjSaM flashBack</a></li>
-
-            <!-- <li><a href="audio/Django.mp3">Django</a></li>
-            <li><a href="audio/flashBack.mp3">DjSaM flashBack</a></li>
-            <li><a href="audio/DjSaM afrobeats.mp3">DjSaM Afro-Beats</a></li>
-            <li><a href="audio/DjSaM Varietés Monde.mp3">DjSaM Varietés Monde</a></li> -->
-         </ul> 
+    
           
 
-          <script src="audioPlayer.js"></script>
-          
-            <script>
-                 // loads the audio player
-                audioPlayer();
-            </script>   
+            
     </section>
 
     <script>
@@ -383,6 +443,12 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
         formMessage.style.color = "red";
     }
 });
+</script>
+<script>
+  AOS.init({
+    duration: 800,
+    once: true
+  });
 </script>
 
 </body>

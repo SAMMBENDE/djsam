@@ -469,7 +469,7 @@ section .title::after{
 
 /* Music Player */
 
-.boxes {
+/* .boxes {
     background-image: url(images/original.gif);
     display: grid;    
     margin: 5em;
@@ -497,7 +497,7 @@ section .title::after{
   }
   #playlist .current-song a {
     color:rgb(211, 251, 10);
-  }
+  } */
 
 
 
