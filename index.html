@@ -309,20 +309,20 @@
                 </div>
                 <div class="column right">
                     <div class="text">Contactez-moi </div>
-                    <form action="#">
+                    <form id="contactForm" action="#">
                         <div class="fields">
                             <div class="field name">
                                 <input type="text" placeholder="Nom" required>
                             </div>
                             <div class="field email">
-                                <input type="email" placeholder="Email" required>
+                                <input type="email" id="email" placeholder="Email" required>
                             </div>
                         </div>
                         <div class="field">
-                            <input type="text" placeholder="Objet" required>
+                            <input type="text" id="subject" placeholder="Objet" required>
                         </div>
                         <div class="field textarea">
-                            <textarea cols="30" rows="10" placeholder="Message..." required></textarea>
+                            <textarea id="message" cols="30" rows="10" placeholder="Message..." required></textarea>
                         </div>
                         <div class="button">
                             <button type="submit">Envoyer</button>
@@ -340,5 +340,42 @@
     </footer>
     
     <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script>
+   (function(){
+      emailjs.init("bRmmDj22CLj9erY1V"); // Use your EmailJS public key here
+   })();
+</script>
+    <script>
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const subject = document.getElementById('subject').value.trim();
+    const message = document.getElementById('message').value.trim();
+    const formMessage = document.getElementById('formMessage');
+
+    if (name && email && subject && message) {
+        emailjs.send("Yservice_604sfkf", "template_ygkxo9o", {
+            from_name: name,
+            from_email: email,
+            subject: subject,
+            message: message
+        })
+        .then(function(response) {
+            formMessage.textContent = "Merci pour votre message, " + name + " !";
+            formMessage.style.color = "green";
+            document.getElementById('contactForm').reset();
+        }, function(error) {
+            formMessage.textContent = "Erreur lors de l'envoi. Veuillez réessayer.";
+            formMessage.style.color = "red";
+        });
+    } else {
+        formMessage.textContent = "Veuillez remplir tous les champs.";
+        formMessage.style.color = "red";
+    }
+});
+</script>
+
 </body>
 </html>
