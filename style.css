@@ -378,9 +378,6 @@ section .title::after{
   display: block;
 }
 
-
-
-
 /* END OF GALLERY */
 
 
@@ -467,37 +464,7 @@ section .title::after{
     background: crimson!important;
 }
 
-/* Music Player */
 
-/* .boxes {
-    background-image: url(images/original.gif);
-    display: grid;    
-    margin: 5em;
-    border-radius: 1%;
-  }
-
-.audio-box {
-    display: grid;
-    
-    background-size: initial; 
-    background-repeat: no-repeat;
-    place-items: center;    
-}
-#playlist {
-    list-style: none;
-    margin-top: 5px;
-    font-size: 20px;
-  }
-  #playlist li a {
-    color: white;
-    font-weight: bold;
-    text-decoration: none;
-    margin-top: 0px;
-    
-  }
-  #playlist .current-song a {
-    color:rgb(211, 251, 10);
-  } */
 
 
 
