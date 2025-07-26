@@ -342,7 +342,7 @@ section .title::after{
 /* galery section */
 
 .gallery {
-  background-color: crimson;
+  background: linear-gradient(135deg, #00eeff 0%, #17b0fd 50%, #03d9fa 100%);
   padding: 60px 20px;
   text-align: center;
   color: #ffffff;
