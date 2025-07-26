@@ -307,6 +307,8 @@
 </section>
     
     <!-- END OF GALLERY SECTION -->
+
+
    
 <section class="boxes">
   <div class="audio-box">
@@ -408,7 +410,208 @@ if (playlistItems.length > 0) {
     <script>
     AOS.init()
     </script>
-    
+
+
+    <!-- CALENDAR SECTION -->
+
+    <!-- Add this section where you want your agenda/calendar to appear -->
+<section class="agenda" id="agenda">
+  <div class="max-width">
+    <h2 class="title">Agenda / Disponibilités</h2>
+    <div id="calendar"></div>
+    <div class="legend">
+      <span class="booked"></span> Réservé
+      <span class="available"></span> Disponible
+    </div>
+  </div>
+</section>
+
+<style>
+/* Simple Calendar Styles */
+#calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  max-width: 420px;
+  margin: 20px auto;
+  background: #fff;
+  border-radius: 10px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.calendar-day {
+  padding: 10px 0;
+  text-align: center;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  background: #f5f5f5;
+  color: #222;
+  transition: background 0.2s;
+}
+.calendar-day.booked {
+  background: #ff9800;
+  color: #fff;
+  cursor: not-allowed;
+}
+.calendar-day.available {
+  background: #17b0fd;
+  color: #fff;
+}
+.calendar-day.today {
+  border: 2px solid #03d9fa;
+}
+.legend {
+  margin-top: 12px;
+  text-align: center;
+}
+.legend span {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  margin: 0 6px -4px 12px;
+}
+.legend .booked { background: #ff9800; }
+.legend .available { background: #17b0fd; }
+@media (max-width: 600px) {
+  #calendar { max-width: 98vw; padding: 6px; }
+  .calendar-day { font-size: 14px; padding: 7px 0; }
+}
+</style>
+
+<script>
+// filepath: /Users/sampsonmbende/Documents/djsam/index.html
+// Example: Booked dates (YYYY-MM-DD)
+const bookedDates = [
+  "2025-08-10",
+  "2025-08-15",
+  "2025-08-22",
+  "2025-09-05"
+];
+
+const monthNames = [
+  "Janvier", "Février", "Mars", "Avril", "Mai", "Juin",
+  "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"
+];
+
+let currentDate = new Date();
+
+function renderCalendar(year = currentDate.getFullYear(), month = currentDate.getMonth()) {
+  const calendar = document.getElementById('calendar');
+  const monthYear = document.getElementById('monthYear');
+  calendar.innerHTML = '';
+  if (monthYear) monthYear.textContent = `${monthNames[month]} ${year}`;
+
+  // Day names
+  const dayNames = ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'];
+  dayNames.forEach((d, i) => {
+    const el = document.createElement('div');
+    el.textContent = d;
+    el.style.fontWeight = 'bold';
+    el.className = (i === 0 || i === 6) ? 'calendar-weekend' : '';
+    calendar.appendChild(el);
+  });
+
+  // First day of month and number of days
+  const firstDay = new Date(year, month, 1).getDay();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+  // Fill empty cells before first day
+  for (let i = 0; i < firstDay; i++) {
+    calendar.appendChild(document.createElement('div'));
+  }
+
+  // Add days
+  for (let day = 1; day <= daysInMonth; day++) {
+    const dateStr = `${year}-${String(month+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+    const dayDiv = document.createElement('div');
+    dayDiv.className = 'calendar-day';
+    const thisDate = new Date(year, month, day);
+    const weekday = thisDate.getDay();
+
+    // Highlight weekends
+    if (weekday === 0 || weekday === 6) {
+      dayDiv.classList.add('calendar-weekend');
+    }
+
+    // Mark today
+    const today = new Date();
+    if (
+      day === today.getDate() &&
+      month === today.getMonth() &&
+      year === today.getFullYear()
+    ) {
+      dayDiv.classList.add('today');
+    }
+
+    // Mark booked/available
+    if (bookedDates.includes(dateStr)) {
+      dayDiv.classList.add('booked');
+      dayDiv.textContent = day;
+      dayDiv.title = "Réservé";
+    } else {
+      dayDiv.classList.add('available');
+      dayDiv.textContent = day;
+      dayDiv.title = "Disponible";
+
+      // Allow booking request on click
+      dayDiv.style.cursor = "pointer";
+      dayDiv.onclick = function() {
+        // Simple prompt for booking request
+        const userName = prompt("Votre nom pour la réservation du " + dateStr + " :");
+        const userEmail = prompt("Votre email :");
+        const userMsg = prompt("Message ou détails de l'événement :");
+        if (userName && userEmail) {
+          // Send booking request via EmailJS
+          emailjs.send("service_604sfkf", "template_jx6mkbi", {
+            name: userName,
+            email: userEmail,
+            title: "Demande de réservation pour le " + dateStr,
+            message: userMsg || ""
+          }).then(function(response) {
+            alert("Votre demande de réservation a été envoyée !");
+          }, function(error) {
+            alert("Erreur lors de l'envoi. Veuillez réessayer.");
+          });
+        }
+      };
+    }
+    calendar.appendChild(dayDiv);
+  }
+}
+
+// Month navigation
+function setupCalendarNav() {
+  if (!document.getElementById('monthYear')) {
+    // Insert controls if not present
+    const controls = document.createElement('div');
+    controls.className = "calendar-controls";
+    controls.innerHTML = `
+      <button id="prevMonth" aria-label="Mois précédent">&lt;</button>
+      <span id="monthYear"></span>
+      <button id="nextMonth" aria-label="Mois suivant">&gt;</button>
+    `;
+    document.querySelector('.agenda .max-width').insertBefore(controls, document.getElementById('calendar'));
+  }
+  document.getElementById('prevMonth').onclick = function() {
+    currentDate.setMonth(currentDate.getMonth() - 1);
+    renderCalendar(currentDate.getFullYear(), currentDate.getMonth());
+  };
+  document.getElementById('nextMonth').onclick = function() {
+    currentDate.setMonth(currentDate.getMonth() + 1);
+    renderCalendar(currentDate.getFullYear(), currentDate.getMonth());
+  };
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  setupCalendarNav();
+  renderCalendar();
+});
+</script>
+
+    <!-- END OF CALENDAR -->
+
     <!-- Contact Section  -->
     <section class="contact" id="contact">
         <div class="max-width">

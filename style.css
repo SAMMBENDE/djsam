@@ -380,7 +380,12 @@ section .title::after{
 
 /* END OF GALLERY */
 
+/* CALENDAR */
 
+.calendar-weekend {
+  background: #ffe0b2 !important;
+  color: #b26a00 !important;
+}
 
 /* PROJECTS SECTION */
 
