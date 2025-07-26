@@ -165,7 +165,7 @@ section .title::after{
 /* home section styling */
 .home{
     display: flex;
-    background: url("images/djmaitresam.jpeg") no-repeat center;
+    background: url("images/bgcover.jpeg") no-repeat center;
     height: 100vh;
     color: #fff;
     min-height: 500px;
@@ -383,7 +383,7 @@ section .title::after{
 /* CALENDAR */
 
 .calendar-weekend {
-  background: #ffe0b2 !important;
+  background: #d9ba8b !important;
   color: #b26a00 !important;
 }
 
