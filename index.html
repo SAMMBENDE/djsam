@@ -31,6 +31,16 @@
 </head>
 
 <body>
+<!-- Background Music Modal -->
+
+    <!-- <div id="bg-music-modal" style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:9999;background:rgba(0,0,0,0.8);display:flex;align-items:center;justify-content:center;">
+  <button id="play-bg-music" style="font-size:2rem;padding:20px 40px;border-radius:12px;background:#ff9800;color:#fff;border:none;cursor:pointer;">
+    🎵 Lancer la musique d'ambiance
+  </button>
+</div>
+<audio id="bg-music" src="audio/andrada.mp3" loop></audio> -->
+
+
     <div class="scroll-up-btn">
         <i class="fas fa-angle-up"></i>
     </div>
@@ -50,6 +60,18 @@
             </div>
         </div>
     </nav>
+
+    <style>
+        .logo span {
+  text-shadow: 0 0 8px #17b0fd, 0 0 16px #ff9800;
+  color: #ff9800;
+  animation: neon-flicker 1.5s infinite alternate;
+}
+@keyframes neon-flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+    </style>
 
     <!-- Home Section  -->
     <section class="home" id="home">
@@ -119,11 +141,12 @@
                 
                     <!-- Skill Logos -->
                     <div class="column left">
-                        
-                        <video autoplay loop muted src="videos/mariage vid.mp4" width="360px" height="400px" alt="clubbing">
-                    </div>                     
+  <div class="video-flex-center">
+    <video autoplay loop muted src="videos/mariage vid.mp4" width="360" height="400" alt="clubbing"></video>
+  </div>
+</div>                   
                    
-                </div>
+                
 
             </div>
         </div>
@@ -352,6 +375,19 @@
     
     <!-- END OF GALLERY SECTION -->
 
+    <span class="music-note">🎵</span>
+
+    <style>
+        .music-note {
+  position: absolute;
+  animation: floatNote 2s infinite linear;
+}
+@keyframes floatNote {
+  0% { bottom: 0; opacity: 1; }
+  100% { bottom: 60px; opacity: 0; }
+}
+    </style>
+
 
    
 <section class="boxes">
@@ -410,6 +446,16 @@
   background: #ff9800;
   color: #222;
 }
+.playlist li.active {
+  background: linear-gradient(90deg, #ff9800 60%, #17b0fd 100%);
+  color: #222;
+  animation: highlightSong 1s;
+}
+@keyframes highlightSong {
+  from { box-shadow: 0 0 0 #ff9800; }
+  to { box-shadow: 0 0 16px #ff9800; }
+}
+
 @media (max-width: 600px) {
   .audio-box {
     max-width: 98vw;
@@ -450,11 +496,7 @@ if (playlistItems.length > 0) {
 }
 </script>
 
-    
-
-
-
-    
+   
           
 
             
@@ -464,6 +506,40 @@ if (playlistItems.length > 0) {
     AOS.init()
     </script>
 
+  <!-- Responsive Single Video Section (Mobile Only, autoplay, loop, muted, no controls) -->
+<div class="mobile-video-section">
+  <video 
+    autoplay 
+    loop 
+    muted 
+    playsinline 
+    style="width:100%;border-radius:12px;display:block;"
+    poster="images/video-thumb.jpg"
+  >
+    <source src="videos/djsamzoom.mp4" type="video/mp4">
+    Votre navigateur ne supporte pas la vidéo.
+  </video>
+</div>
+
+<style>
+.mobile-video-section {
+  display: none;
+  margin: 24px auto 32px auto;
+  max-width: 480px;
+  padding: 0 8px;
+}
+@media (max-width: 600px) {
+  .mobile-video-section {
+    display: block;
+  }
+}
+.mobile-video-section video {
+  width: 100%;
+  height: auto;
+  max-width: 480px;
+  box-shadow: 0 2px 12px #0002;
+}
+</style>
 
     <!-- CALENDAR SECTION -->
 
@@ -540,8 +616,35 @@ const bookedDates = [
   "2025-08-10",
   "2025-08-15",
   "2025-08-22",
-  "2025-09-05"
+  "2025-09-05",
+  
+  
+  // Reserve September 18, 19, 20
+  "2025-09-18",
+  "2025-09-19",
+  "2025-09-20",
+  "2025-10-10",
+  "2025-10-17",
+  "2025-10-24"
 ];
+
+// Reserve all Saturdays in October 2025
+const year = 2025;
+const month = 9; // October (0-based index)
+const daysInOctober = new Date(year, month + 1, 0).getDate();
+for (let day = 1; day <= daysInOctober; day++) {
+  const date = new Date(year, month, day);
+  if (date.getDay() === 6) { // 6 = Saturday
+    bookedDates.push(`${year}-10-${String(day).padStart(2, '0')}`);
+  } 
+}
+
+for (let day = 1; day <= daysInOctober; day++) {
+  const date = new Date(year, month, day);
+  if (date.getDay() === 0) { // 0 = Sunday
+    bookedDates.push(`${year}-10-${String(day).padStart(2, '0')}`);
+  }
+}
 
 const monthNames = [
   "Janvier", "Février", "Mars", "Avril", "Mai", "Juin",
@@ -665,6 +768,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     <!-- END OF CALENDAR -->
 
+
+   
+
     <!-- Contact Section  -->
     <section class="contact" id="contact">
         <div class="max-width">
@@ -775,6 +881,15 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
         <span> <a href="#">DjSaM</a> | <span class="far fa-copyright"></span> 2025 All rights reserved.</span>
         
     </footer>
+<!-- Background Music Modal script-->
+
+  <!-- <script>document.getElementById('play-bg-music').onclick = function() {
+  var audio = document.getElementById('bg-music');
+  audio.volume = 0.5; // optional: set volume
+  audio.play();
+  document.getElementById('bg-music-modal').style.display = 'none';
+}; -->
+</script>  
 
 </body>
 </html>
