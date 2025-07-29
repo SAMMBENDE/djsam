@@ -495,6 +495,17 @@ if (playlistItems.length > 0) {
   playlistItems[0].classList.add('active');
   audioPlayer.src = playlistItems[0].dataset.src;
 }
+audioPlayer.addEventListener('ended', function() {
+  // Find the currently active song
+  const currentIndex = Array.from(playlistItems).findIndex(li => li.classList.contains('active'));
+  // Get the next song index (loop to start if at end)
+  const nextIndex = (currentIndex + 1) % playlistItems.length;
+  // Play the next song
+  playlistItems.forEach(li => li.classList.remove('active'));
+  playlistItems[nextIndex].classList.add('active');
+  audioPlayer.src = playlistItems[nextIndex].dataset.src;
+  audioPlayer.play();
+});
 </script>
 
    
