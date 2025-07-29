@@ -375,6 +375,9 @@
     
     <!-- END OF GALLERY SECTION -->
 
+
+    <!-- MUSIC SECTION -->
+
     <span class="music-note">🎵</span>
 
     <style>
@@ -391,7 +394,7 @@
 
    
 <section class="boxes">
-  <div class="audio-box">
+  <!-- <div class="audio-box">
     <audio id="audioPlayer" controls preload="none" style="width:100%;"></audio>
     <ul id="playlist" class="playlist">
       <li data-src="audio/4kampe+.mp3">DjSaM 4Kampe + Frenchie Tendances</li>
@@ -411,7 +414,80 @@
       <li data-src="audio/MR EMMA 1.mp3">DjSaM Makossa Mature</li>
     </ul>
 
+  </div> -->
+<div class="audio-box">
+  <div class="playlist-tabs">     
+    <button class="tab-btn active" data-tab="afro">DjSaM Mixtapes</button>
+    <button class="tab-btn" data-tab="zouk">Hits</button>
+    <button class="tab-btn" data-tab="funk">Variétés</button>
+    <!-- Add more categories as needed -->
   </div>
+  <audio id="audioPlayer" controls preload="none" style="width:100%;"></audio>
+  <ul id="playlist-afro" class="playlist category-list" style="display:block;">
+    <li data-src="audio/4kampe+.mp3">DjSaM 4Kampe + Frenchie Tendances</li>
+      <li data-src="audio/badanda_eyango_rmx.mp3">DjSaM Badanda rmx</li>    
+      <li data-src="audio/DjSaM_kompa_zouk.mp3">DjSaM Zouk/Kompa</li>
+      <li data-src="audio/djsam_frenchFunk.mp3">DjSaM French Funk</li>
+      <li data-src="audio/libeyo.mp3">DjSaM Ndombolo Libeyo</li>
+      <li data-src="audio/fally.mp3">DjSaM Fally</li>
+      <li data-src="audio/faally_bona.mp3">DjSaM Mayday Richard Bona Rmx</li>
+      <li data-src="audio/davidozouglou.mp3">DjSaM Afro-Zouglou</li>
+      <li data-src="audio/simi.mp3">DjSaM Simi Marvin Gaye rmx</li>
+      <li data-src="audio/jamboree.mp3">DjSaM Jamboree rmx</li>
+      <li data-src="audio/naijambole.mp3">DjSaM Naija+Mbole</li>
+      <li data-src="audio/kaomakoffi.mp3">DjSaM Ndombolo</li>
+      <li data-src="audio/naijaparty.mp3">DjSaM Naija Party</li>
+      <li data-src="audio/mbole150.mp3">DjSaM Mbole Rmx</li>
+      <li data-src="audio/MR EMMA 1.mp3">DjSaM Makossa Mature</li>
+  </ul>
+  <!-- <ul id="playlist-afro" class="playlist category-list">
+    <li data-src="audio/afro1.mp3">Afro Song 1</li>
+    <li data-src="audio/afro2.mp3">Afro Song 2</li>
+  </ul> -->
+  <ul id="playlist-zouk" class="playlist category-list" style="display:none;">
+    <li data-src="audio/DjSaM_kompa_zouk.mp3">DjSaM Zouk/Kompa</li>
+    <li data-src="audio/mesamours.mp3">Sergio Polo</li>
+    <li data-src="audio/amor.mp3">Amor (Remix)</li>
+    <li data-src="audio/beynaud.mp3">Serge Beynaud - Okeninkpin</li>
+    <li data-src="audio/kojo.mp3">KOJO BLAK - Excellent (w Kelvyn Boy)</li>
+    <li data-src="audio/longe.mp3">Longe le boko</li>
+    <li data-src="audio/decapsuleur.mp3">Kedjevara - Decapsuleur</li>
+    <li data-src="audio/kedjevara1.mp3">Kedjevara - On est la</li>
+    <li data-src="audio/kerozene.mp3">KEROZEN X DIDI B (ARC DE TRIOMPHE)</li>
+    <li data-src="audio/espoir.mp3">Espoir 2000 - Respectez</li>
+    <li data-src="audio/luna.mp3">Dj Luna Maserati & Kratos Beat - Palala</li>
+    <li data-src="audio/luna.mp3">Didi B, Naira Marley - Fatúmata</li>
+    <li data-src="audio/god.mp3">Dorcas Kaja - IL EST BON DE LOUER DIEU</li>
+    <li data-src="audio/aya.mp3">Aya Nakamura & Joé Dwèt Filé - Baddies</li>
+    <li data-src="audio/yaro.mp3">Dr. Yaro - Simba</li>
+    <li data-src="audio/gims.mp3">GIMS ft. AYA NAKAMURA - IMPOLI</li>
+  </ul>
+  <ul id="playlist-funk" class="playlist category-list" style="display:none;">
+    <li data-src="audio/Effrakata.mp3">Effrakata</li>
+    <li data-src="audio/mix1.mp3">Mix Premier - L' ORACLE</li>
+    <li data-src="audio/blvdj.mp3">Boulevard Dj</li>
+    <li data-src="audio/lesavoir.mp3">Shakazulu Le Savoir</li>
+    <li data-src="audio/likambo.mp3">Shakazulu Likambo</li>
+    <li data-src="audio/decapsuleur.mp3">Kedjevara - Decapsuleur</li>
+    <li data-src="audio/kedjevara.mp3">Kedjevara ça fait mal</li>
+    <li data-src="audio/bintou.mp3">Djelykaba Bintou - N'kelenta</li>
+    <li data-src="audio/maguise.mp3">Djelykaba Bintou Ma Guise</li>
+    <li data-src="audio/cinoblack.mp3">Cino Black ft Zaparo</li>
+    <li data-src="audio/general.mp3">GENERAL KALASH - Ya Merco</li>
+    <li data-src="audio/mix.mp3">Mix Premier - Amour Compliqué</li>
+    <li data-src="audio/instru.mp3">Instrumental vibration dance</li>
+    <li data-src="audio/roga.mp3">Roga Roga ft Lionel Obama Bokoko Rmx</li>
+    <li data-src="audio/rouler.mp3">Rouler Moutou</li>
+    <li data-src="audio/beats.mp3">Trompette Africano - PowerMusicbeatz</li>
+    <li data-src="audio/roga1.mp3">Roga Roga et Zaparo Ayessabouya</li>
+    <li data-src="audio/bobara.mp3">Bobaraba (feat. Mix Premier) (Acte 2)</li>
+    <li data-src="audio/djeneba.mp3">Debordo Leekunfa - Djeneba Djaba</li>
+    <li data-src="audio/kedjevara1.mp3">Kedjevara - On est la</li>
+
+
+  </ul>
+</div>
+
 </section>
 
 <style>
@@ -452,6 +528,25 @@
   color: #222;
   animation: highlightSong 1s;
 }
+
+.playlist-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.tab-btn {
+  padding: 6px 16px;
+  border: none;
+  background: #333;
+  color: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.tab-btn.active {
+  background: #ff9800;
+  color: #222;
+}
+
 @keyframes highlightSong {
   from { box-shadow: 0 0 0 #ff9800; }
   to { box-shadow: 0 0 16px #ff9800; }
@@ -474,36 +569,49 @@
 </style>
 
 <script>
-// filepath: /Users/sampsonmbende/Documents/djsam/index.html
 const audioPlayer = document.getElementById('audioPlayer');
-const playlistItems = document.querySelectorAll('#playlist li');
+const tabBtns = document.querySelectorAll('.tab-btn');
+const categoryLists = document.querySelectorAll('.category-list');
 
-playlistItems.forEach(item => {
-  item.addEventListener('click', function() {
-    // Remove active class from all
-    playlistItems.forEach(li => li.classList.remove('active'));
-    // Add active class to clicked
+tabBtns.forEach(btn => {
+  btn.addEventListener('click', function() {
+    tabBtns.forEach(b => b.classList.remove('active'));
     this.classList.add('active');
-    // Set audio src and play
+    categoryLists.forEach(list => list.style.display = 'none');
+    document.getElementById('playlist-' + this.dataset.tab).style.display = '';
+    // Play first song in selected category
+    const items = document.querySelectorAll('#playlist-' + this.dataset.tab + ' li');
+    if (items.length > 0) {
+      categoryLists.forEach(list => {
+        list.querySelectorAll('li').forEach(li => li.classList.remove('active'));
+      });
+      items[0].classList.add('active');
+      audioPlayer.src = items[0].dataset.src;
+    }
+  });
+});
+
+// Playlist click logic
+document.querySelectorAll('.playlist li').forEach(item => {
+  item.addEventListener('click', function() {
+    categoryLists.forEach(list => {
+      list.querySelectorAll('li').forEach(li => li.classList.remove('active'));
+    });
+    this.classList.add('active');
     audioPlayer.src = this.dataset.src;
     audioPlayer.play();
   });
 });
 
-// Optional: Play first track by default
-if (playlistItems.length > 0) {
-  playlistItems[0].classList.add('active');
-  audioPlayer.src = playlistItems[0].dataset.src;
-}
+// Auto-play next song in current category
 audioPlayer.addEventListener('ended', function() {
-  // Find the currently active song
-  const currentIndex = Array.from(playlistItems).findIndex(li => li.classList.contains('active'));
-  // Get the next song index (loop to start if at end)
-  const nextIndex = (currentIndex + 1) % playlistItems.length;
-  // Play the next song
-  playlistItems.forEach(li => li.classList.remove('active'));
-  playlistItems[nextIndex].classList.add('active');
-  audioPlayer.src = playlistItems[nextIndex].dataset.src;
+  const activeList = Array.from(categoryLists).find(list => list.style.display !== 'none');
+  const items = activeList.querySelectorAll('li');
+  const currentIndex = Array.from(items).findIndex(li => li.classList.contains('active'));
+  const nextIndex = (currentIndex + 1) % items.length;
+  items.forEach(li => li.classList.remove('active'));
+  items[nextIndex].classList.add('active');
+  audioPlayer.src = items[nextIndex].dataset.src;
   audioPlayer.play();
 });
 </script>
