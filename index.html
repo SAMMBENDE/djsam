@@ -402,10 +402,10 @@
 <div class="audio-box">
 
     <!-- Bass & Treble controls -->
-<div class="audio-filters" style="margin:12px 0;">
+<!-- <div class="audio-filters" style="margin:12px 0;">
   <label>Bass <input type="range" id="bassControl" min="0" max="20" value="10"></label>
   <label style="margin-left:16px;">Treble <input type="range" id="trebleControl" min="0" max="20" value="10"></label>
-</div>
+</div> -->
 
   <div class="playlist-tabs">
     <button class="tab-btn active" data-tab="afro">DjSaM Mixtapes</button>
@@ -549,6 +549,13 @@
   list-style: none;
   padding: 0;
   margin: 0;
+   max-height: 220px;
+  overflow-y: auto;
+}
+@media (max-width: 600px) {
+  .playlist {
+    max-height: 160px;
+  }
 }
 .playlist li {
   padding: 10px 12px;
@@ -619,6 +626,47 @@
   80%  { height: 12px; }
   100% { height: 8px; }
 }
+
+@media (max-width: 600px) {
+  .audio-box {
+    max-width: 98vw;
+    padding: 8px;
+    border-radius: 8px;
+  }
+  .player-controls {
+    flex-direction: row;
+    gap: 6px;
+    margin-bottom: 8px;
+  }
+  .repeat-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 1rem;
+    padding: 0;
+  }
+  .equalizer {
+    height: 14px;
+    margin-right: 4px;
+  }
+  .equalizer span {
+    width: 3px;
+  }
+  .playlist-tabs {
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  .playlist li {
+    font-size: 15px;
+    padding: 7px 6px;
+    margin-bottom: 4px;
+  }
+  #audioPlayer {
+    min-width: 0;
+    width: 100%;
+    font-size: 14px;
+  }
+}
+
 @media (max-width: 600px) {
   .equalizer { height: 18px; margin-right: 6px; }
   .equalizer span { width: 4px; }
@@ -642,6 +690,60 @@
 .playlist {
   max-height: 400px;   /* Adjust as needed */
   overflow-y: auto;
+}
+
+@media (max-width: 480px) {
+  .audio-box {
+    max-width: 100vw;
+    padding: 4px;
+    border-radius: 6px;
+    margin: 0 0 16px 0;
+  }
+  .player-controls {
+    flex-direction: row;
+    gap: 4px;
+    margin-bottom: 6px;
+    align-items: center;
+  }
+  .repeat-btn {
+    width: 28px;
+    height: 28px;
+    font-size: 1rem;
+    padding: 0;
+    min-width: 28px;
+    min-height: 28px;
+  }
+  .equalizer {
+    height: 10px;
+    margin-right: 2px;
+  }
+  .equalizer span {
+    width: 2px;
+  }
+  .playlist-tabs {
+    flex-wrap: wrap;
+    gap: 2px;
+    font-size: 12px;
+  }
+  .tab-btn {
+    min-width: 70px;
+    font-size: 12px;
+    padding: 4px 8px;
+  }
+  .playlist {
+    max-height: 110px;
+    font-size: 13px;
+  }
+  .playlist li {
+    font-size: 13px;
+    padding: 6px 4px;
+    margin-bottom: 2px;
+  }
+  #audioPlayer {
+    min-width: 0;
+    width: 100%;
+    font-size: 12px;
+  }
 }
 </style>
 
@@ -711,41 +813,7 @@ audioPlayer.addEventListener('ended', function() {
 });
 
 // Bass and Treble controls
-const bassControl = document.getElementById('bassControl');
-const trebleControl = document.getElementById('trebleControl');
 
-// Setup Web Audio API
-const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-const source = audioCtx.createMediaElementSource(audioPlayer);
-const bassFilter = audioCtx.createBiquadFilter();
-bassFilter.type = "lowshelf";
-bassFilter.frequency.value = 200;
-bassFilter.gain.value = 0;
-
-const trebleFilter = audioCtx.createBiquadFilter();
-trebleFilter.type = "highshelf";
-trebleFilter.frequency.value = 3000;
-trebleFilter.gain.value = 0;
-
-// Connect filters
-source.connect(bassFilter);
-bassFilter.connect(trebleFilter);
-trebleFilter.connect(audioCtx.destination);
-
-// Update filters on slider change
-bassControl.addEventListener('input', function() {
-  bassFilter.gain.value = this.value - 10; // Range -10 to +10
-});
-trebleControl.addEventListener('input', function() {
-  trebleFilter.gain.value = this.value - 10; // Range -10 to +10
-});
-
-// Resume audio context on play (required by browsers)
-audioPlayer.addEventListener('play', function() {
-  if (audioCtx.state === 'suspended') {
-    audioCtx.resume();
-  }
-});
 
 </script>
 
