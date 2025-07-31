@@ -378,6 +378,8 @@
 
     <!-- MUSIC SECTION -->
 
+
+    
     <span class="music-note">🎵</span>
 
     <style>
@@ -394,36 +396,36 @@
 
    
 <section class="boxes">
-  <!-- <div class="audio-box">
-    <audio id="audioPlayer" controls preload="none" style="width:100%;"></audio>
-    <ul id="playlist" class="playlist">
-      <li data-src="audio/4kampe+.mp3">DjSaM 4Kampe + Frenchie Tendances</li>
-      <li data-src="audio/badanda_eyango_rmx.mp3">DjSaM Badanda rmx</li>    
-      <li data-src="audio/DjSaM_kompa_zouk.mp3">DjSaM Zouk/Kompa</li>
-      <li data-src="audio/djsam_frenchFunk.mp3">DjSaM French Funk</li>
-      <li data-src="audio/libeyo.mp3">DjSaM Ndombolo Libeyo</li>
-      <li data-src="audio/fally.mp3">DjSaM Fally</li>
-      <li data-src="audio/faally_bona.mp3">DjSaM Mayday Richard Bona Rmx</li>
-      <li data-src="audio/davidozouglou.mp3">DjSaM Afro-Zouglou</li>
-      <li data-src="audio/simi.mp3">DjSaM Simi Marvin Gaye rmx</li>
-      <li data-src="audio/jamboree.mp3">DjSaM Jamboree rmx</li>
-      <li data-src="audio/naijambole.mp3">DjSaM Naija+Mbole</li>
-      <li data-src="audio/kaomakoffi.mp3">DjSaM Ndombolo</li>
-      <li data-src="audio/naijaparty.mp3">DjSaM Naija Party</li>
-      <li data-src="audio/mbole150.mp3">DjSaM Mbole Rmx</li>
-      <li data-src="audio/MR EMMA 1.mp3">DjSaM Makossa Mature</li>
-    </ul>
+  
+  
 
-  </div> -->
 <div class="audio-box">
-  <div class="playlist-tabs">     
+
+    <!-- Bass & Treble controls -->
+<div class="audio-filters" style="margin:12px 0;">
+  <label>Bass <input type="range" id="bassControl" min="0" max="20" value="10"></label>
+  <label style="margin-left:16px;">Treble <input type="range" id="trebleControl" min="0" max="20" value="10"></label>
+</div>
+
+  <div class="playlist-tabs">
     <button class="tab-btn active" data-tab="afro">DjSaM Mixtapes</button>
     <button class="tab-btn" data-tab="zouk">Hits</button>
     <button class="tab-btn" data-tab="funk">Variétés</button>
     <!-- Add more categories as needed -->
   </div>
+  
+  <div class="player-controls">
+  <div class="equalizer" title="Equalizer">
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
+  <button id="repeatBtn" title="Répéter la chanson" class="repeat-btn">
+    <span>🔁</span>
+  </button>
   <audio id="audioPlayer" controls preload="none" style="width:100%;"></audio>
-  <ul id="playlist-afro" class="playlist category-list" style="display:block;">
+</div>
+
+  <!-- ...your playlists... -->
+   <ul id="playlist-afro" class="playlist category-list" style="display:block;">
     <li data-src="audio/4kampe+.mp3">DjSaM 4Kampe + Frenchie Tendances</li>
       <li data-src="audio/badanda_eyango_rmx.mp3">DjSaM Badanda rmx</li>    
       <li data-src="audio/DjSaM_kompa_zouk.mp3">DjSaM Zouk/Kompa</li>
@@ -490,6 +492,9 @@
   </ul>
 </div>
 
+  
+</div>
+
 </section>
 
 <style>
@@ -501,6 +506,40 @@
   background: #222;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+.player-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+.repeat-btn {
+  background: #333;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.repeat-btn.active {
+  background: #ff9800;
+  color: #222;
+}
+@media (max-width: 600px) {
+  .player-controls {
+    gap: 8px;
+  }
+  .repeat-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 1.2rem;
+  }
 }
 #audioPlayer {
   width: 100%;
@@ -547,6 +586,42 @@
 .tab-btn.active {
   background: #ff9800;
   color: #222;
+}
+
+.equalizer {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 28px;
+  margin-right: 12px;
+}
+.equalizer span {
+  display: block;
+  width: 5px;
+  height: 100%;
+  background: linear-gradient(180deg, #17b0fd 60%, #ff9800 100%);
+  border-radius: 2px;
+}
+.equalizer.playing span {
+  animation: eq-bar 1s infinite;
+}
+.equalizer span:nth-child(1) { animation-delay: 0s; }
+.equalizer span:nth-child(2) { animation-delay: 0.2s; }
+.equalizer span:nth-child(3) { animation-delay: 0.4s; }
+.equalizer span:nth-child(4) { animation-delay: 0.2s; }
+.equalizer span:nth-child(5) { animation-delay: 0s; }
+
+@keyframes eq-bar {
+  0%   { height: 8px; }
+  20%  { height: 28px; }
+  40%  { height: 16px; }
+  60%  { height: 24px; }
+  80%  { height: 12px; }
+  100% { height: 8px; }
+}
+@media (max-width: 600px) {
+  .equalizer { height: 18px; margin-right: 6px; }
+  .equalizer span { width: 4px; }
 }
 
 @keyframes highlightSong {
@@ -616,6 +691,62 @@ audioPlayer.addEventListener('ended', function() {
   audioPlayer.src = items[nextIndex].dataset.src;
   audioPlayer.play();
 });
+
+const repeatBtn = document.getElementById('repeatBtn');
+repeatBtn.addEventListener('click', function() {
+  audioPlayer.loop = !audioPlayer.loop;
+  repeatBtn.classList.toggle('active', audioPlayer.loop);
+});
+
+const equalizer = document.querySelector('.equalizer');
+
+audioPlayer.addEventListener('play', function() {
+  equalizer.classList.add('playing');
+});
+audioPlayer.addEventListener('pause', function() {
+  equalizer.classList.remove('playing');
+});
+audioPlayer.addEventListener('ended', function() {
+  equalizer.classList.remove('playing');
+});
+
+// Bass and Treble controls
+const bassControl = document.getElementById('bassControl');
+const trebleControl = document.getElementById('trebleControl');
+
+// Setup Web Audio API
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+const source = audioCtx.createMediaElementSource(audioPlayer);
+const bassFilter = audioCtx.createBiquadFilter();
+bassFilter.type = "lowshelf";
+bassFilter.frequency.value = 200;
+bassFilter.gain.value = 0;
+
+const trebleFilter = audioCtx.createBiquadFilter();
+trebleFilter.type = "highshelf";
+trebleFilter.frequency.value = 3000;
+trebleFilter.gain.value = 0;
+
+// Connect filters
+source.connect(bassFilter);
+bassFilter.connect(trebleFilter);
+trebleFilter.connect(audioCtx.destination);
+
+// Update filters on slider change
+bassControl.addEventListener('input', function() {
+  bassFilter.gain.value = this.value - 10; // Range -10 to +10
+});
+trebleControl.addEventListener('input', function() {
+  trebleFilter.gain.value = this.value - 10; // Range -10 to +10
+});
+
+// Resume audio context on play (required by browsers)
+audioPlayer.addEventListener('play', function() {
+  if (audioCtx.state === 'suspended') {
+    audioCtx.resume();
+  }
+});
+
 </script>
 
    
