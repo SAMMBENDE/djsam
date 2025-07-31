@@ -17,32 +17,26 @@ $(document).ready(function () {
 
   //GALERY SECTION
 
+  // Initialize Swiper with fade effect
   const swiper = new Swiper('.mySwiper', {
-    loop: true,
-    spaceBetween: 20, // spacing between slides
-    slidesPerView: 1, // default for mobile
-    pagination: {
-      el: '.swiper-pagination',
-      clickable: true,
+    effect: 'fade',
+    fadeEffect: {
+      crossFade: true,
+    },
+    speed: 1400,
+    autoplay: {
+      delay: 3000,
+      disableOnInteraction: false,
     },
     navigation: {
       nextEl: '.swiper-button-next',
       prevEl: '.swiper-button-prev',
     },
-    autoplay: {
-      delay: 3000,
-      disableOnInteraction: false,
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
     },
-    breakpoints: {
-      // When window width is >= 768px (tablet+)
-      768: {
-        slidesPerView: 2,
-      },
-      // When window width is >= 1024px (desktop)
-      1024: {
-        slidesPerView: 3,
-      },
-    },
+    loop: true,
   })
 
   // slide-up script
@@ -103,4 +97,50 @@ $(document).ready(function () {
 
 AOS.init({
   duration: 1200,
+})
+
+// ...existing code...
+
+// Floating music notes animation
+function createFloatingNote() {
+  const note = document.createElement('div')
+  note.className = 'floating-note'
+  note.innerHTML = ['🎵', '🎶', '♪', '♫'][Math.floor(Math.random() * 4)]
+
+  // Random position around the audio player
+  const audioBox = document.querySelector('.audio-box')
+  const rect = audioBox.getBoundingClientRect()
+  note.style.left = Math.random() * rect.width + 'px'
+  note.style.top = rect.height + 'px'
+
+  audioBox.appendChild(note)
+
+  // Remove note after animation
+  setTimeout(() => {
+    if (note.parentNode) {
+      note.parentNode.removeChild(note)
+    }
+  }, 3000)
+}
+
+let noteInterval
+
+// Start/stop floating notes based on audio state
+document.addEventListener('DOMContentLoaded', function () {
+  const audioPlayer = document.getElementById('audioPlayer')
+
+  if (audioPlayer) {
+    audioPlayer.addEventListener('play', function () {
+      // Create notes every 500ms while playing
+      noteInterval = setInterval(createFloatingNote, 500)
+    })
+
+    audioPlayer.addEventListener('pause', function () {
+      clearInterval(noteInterval)
+    })
+
+    audioPlayer.addEventListener('ended', function () {
+      clearInterval(noteInterval)
+    })
+  }
 })
