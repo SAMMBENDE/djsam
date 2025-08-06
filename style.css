@@ -629,6 +629,63 @@ section .title::after {
   background: none;
 }
 
+/* audio player styles */
+.audio-player {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background: #222;
+  border-radius: 6px;
+  margin-top: 20px;
+}
+.audio-player .track-info {
+  flex: 1;
+  margin-right: 20px;
+}
+.audio-player .track-info .track-title {
+  font-size: 18px;
+  font-weight: 500;
+  color: #fff;
+}
+.audio-player .track-info .track-artist {
+  font-size: 14px;
+  color: #aaa;
+}
+.audio-player .controls {
+  display: flex;
+  align-items: center;
+}
+.audio-player .controls button {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+  margin: 0 5px;
+}
+.audio-player .controls button:hover {
+  color: crimson;
+}
+.audio-player .progress {
+  flex: 1;
+  margin: 0 10px;
+}
+.audio-player .progress input {
+  width: 100%;
+}
+.audio-player .volume {
+  display: flex;
+  align-items: center;
+}
+.audio-player .volume label {
+  margin-right: 10px;
+  color: #fff;
+}
+.audio-player .volume input {
+  width: 100px;
+}
+
 /* footer section styling */
 footer {
   background: #111;

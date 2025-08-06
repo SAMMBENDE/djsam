@@ -144,3 +144,76 @@ document.addEventListener('DOMContentLoaded', function () {
     })
   }
 })
+
+// Global Audio Context for player controls
+let playerAudioCtx
+let playerSource
+let playerBassFilter
+let playerTrebleFilter
+let isPlayerAudioSetup = false
+
+function setupPlayerAudio() {
+  if (isPlayerAudioSetup) return
+
+  try {
+    const audioPlayer = document.getElementById('audioPlayer')
+    if (!audioPlayer) return
+
+    playerAudioCtx = new (window.AudioContext || window.webkitAudioContext)()
+    playerSource = playerAudioCtx.createMediaElementSource(audioPlayer)
+
+    // Bass filter (Low-shelf)
+    playerBassFilter = playerAudioCtx.createBiquadFilter()
+    playerBassFilter.type = 'lowshelf'
+    playerBassFilter.frequency.value = 200
+    playerBassFilter.gain.value = 0
+
+    // Treble filter (High-shelf)
+    playerTrebleFilter = playerAudioCtx.createBiquadFilter()
+    playerTrebleFilter.type = 'highshelf'
+    playerTrebleFilter.frequency.value = 3000
+    playerTrebleFilter.gain.value = 0
+
+    // Connect the audio chain
+    playerSource.connect(playerBassFilter)
+    playerBassFilter.connect(playerTrebleFilter)
+    playerTrebleFilter.connect(playerAudioCtx.destination)
+
+    isPlayerAudioSetup = true
+  } catch (error) {
+    console.log('Audio processing not supported in this browser')
+  }
+}
+
+// Player control handlers
+document.addEventListener('DOMContentLoaded', function () {
+  const bassPlayer = document.getElementById('bassPlayer')
+  const treblePlayer = document.getElementById('treblePlayer')
+
+  if (bassPlayer && treblePlayer) {
+    bassPlayer.addEventListener('input', function () {
+      if (playerBassFilter) {
+        playerBassFilter.gain.value = this.value - 10 // Range -10 to +10
+      }
+    })
+
+    treblePlayer.addEventListener('input', function () {
+      if (playerTrebleFilter) {
+        playerTrebleFilter.gain.value = this.value - 10 // Range -10 to +10
+      }
+    })
+  }
+
+  // Setup audio when player starts
+  const audioPlayer = document.getElementById('audioPlayer')
+  if (audioPlayer) {
+    audioPlayer.addEventListener('play', function () {
+      if (!isPlayerAudioSetup) {
+        setupPlayerAudio()
+      }
+      if (playerAudioCtx && playerAudioCtx.state === 'suspended') {
+        playerAudioCtx.resume()
+      }
+    })
+  }
+})

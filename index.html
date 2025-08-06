@@ -407,11 +407,22 @@
   <label style="margin-left:16px;">Treble <input type="range" id="trebleControl" min="0" max="20" value="10"></label>
 </div> -->
 
-  <div class="playlist-tabs">
-    <button class="tab-btn active" data-tab="afro">DjSaM Mixtapes</button>
-    <button class="tab-btn" data-tab="zouk">Hits</button>
-    <button class="tab-btn" data-tab="funk">Variétés</button>
-    <!-- Add more categories as needed -->
+ <!-- Tabs with Audio Controls -->
+  <div class="playlist-tabs-header">
+    <div class="playlist-tabs">
+      <button class="tab-btn active" data-tab="afro">DjSaM Mixtapes</button>
+      <button class="tab-btn" data-tab="zouk">Hits</button>
+      <button class="tab-btn" data-tab="funk">Variétés</button>
+    </div>
+    
+    <!-- Audio Controls in Player Header -->
+    <div class="audio-controls-player">
+      <div class="control-group-player">
+        <label>🎛️</label>
+        <input type="range" id="bassPlayer" min="0" max="20" value="10" title="Bass">
+        <input type="range" id="treblePlayer" min="0" max="20" value="10" title="Treble">
+      </div>
+    </div>
   </div>
   
   <div class="player-controls">
